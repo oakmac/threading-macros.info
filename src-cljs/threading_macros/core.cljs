@@ -620,7 +620,7 @@
         height (* max-y small-y-unit)]
     (list
       (map-indexed (partial frame-html chars max-x max-y) step-frames)
-      [:div.clr-43e49])))
+      [:div.clr-6f03b])))
 
 (hiccups/defhtml buttons [a]
   [:button#pauseButton.btn-db258
@@ -642,9 +642,10 @@
 
 (def main-animation-speed 800)
 
+(def animating? (atom false))
+
 (defn- animation-finished! []
-  (js-log "finished!")
-  )
+  (reset! animating? false))
 
 ;; TODO: this function could be cleaner
 (defn- animate-char! [[k v]]
@@ -672,6 +673,7 @@
       (js-obj "duration" main-animation-speed))))
 
 (defn- animate-to-position! [pos]
+  (reset! animating? true)
   (doall (map animate-char! pos))
   (js/setTimeout animation-finished! main-animation-speed))
 
@@ -727,30 +729,30 @@
 ;; Current Step
 ;;------------------------------------------------------------------------------
 
-(def current-step-index (atom 0))
 (def active-step-class "active-step-938e5")
 
-(defn- on-change-step [_kwd _atom old-idx new-idx]
+(def current-step-index (atom 0))
+
+(defn- on-change-step-index [_kwd _atom old-idx new-idx]
   (let [animation @current-animation
         frames (:frames animation)
+        ;;frame-index
         new-frame (nth frames new-idx)]
     ;; toggle active step
     (.removeClass ($ (str "#step-" old-idx)) active-step-class)
     (.addClass    ($ (str "#step-" new-idx)) active-step-class)
 
     ;; animate if the frames are adjacent, else set position instantly
-    ; (if (one? (js/Math.abs (- new-idx old-idx)))
-    ;   (animate-to-position! new-frame)
-    ;   (set-position-instant! new-frame))
-    ))
-
-(add-watch current-step-index :change on-change-step)
+    (if (one? (js/Math.abs (- new-idx old-idx)))
+      (animate-to-position! new-frame)
+      (set-position-instant! new-frame))))
 
 ;;------------------------------------------------------------------------------
 ;; Play / Pause Button
 ;;------------------------------------------------------------------------------
 
 (def playing? (atom false))
+
 (def time-between-rounds (* main-animation-speed 2))
 
 (defn- on-last-frame? []
@@ -772,7 +774,7 @@
   ;; toggle play / pause buttons
   (if p?
     (do (hide-el! "playButton")
-        (hide-el! "pauseButton"))
+        (show-el! "pauseButton"))
     (do (show-el! "playButton")
         (hide-el! "pauseButton")))
 
@@ -796,20 +798,22 @@
         anim (nth animations anim-index false)]
     (when anim
       (reset! current-animation anim)
-      (reset! current-step-index 0))))
+      (remove-watch current-step-index :change)
+      (reset! current-step-index 0)
+      (set-position-instant! (first (:frames anim)))
+      (add-watch current-step-index :change on-change-step-index))))
 
 (defn- click-step [js-evt]
-  (let [$target-el ($ (aget js-evt "currentTarget"))
-        step-index (int (.attr $target-el "data-step-index"))
-        ;;frame-index (nth (:steps @current-animation) step-index false)
-        ]
-    ;; TODO: verify that step-index is valid
-    (when-not (= step-index @current-step-index)
-      (reset! current-step-index step-index))))
+  (when-not (or @playing? @animating?)
+    (let [$target-el ($ (aget js-evt "currentTarget"))
+          step-index (int (.attr $target-el "data-step-index"))]
+      ;; TODO: verify that step-index is valid
+      (when-not (= step-index @current-step-index)
+        (reset! current-step-index step-index)))))
 
 (defn- click-play-btn [js-evt]
-  (swap! current-frame-index inc)
-  ;;(reset! playing? true)
+  ;;(swap! current-frame-index inc)
+  (reset! playing? true)
   )
 
 (defn- click-pause-btn [js-evt]
