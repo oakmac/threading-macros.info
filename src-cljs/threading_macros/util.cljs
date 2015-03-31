@@ -25,3 +25,12 @@
         (.toString (bit-or (* 16 (.random js/Math)) 0) 16)
         x))
     "00000000-0000-4000-0000-000000000000")))
+
+(defn half [x]
+  (/ x 2))
+
+(defn twice [x]
+  (* 2 x))
+
+(defn one? [x]
+  (= 1 x))

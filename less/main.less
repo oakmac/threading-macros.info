@@ -1,0 +1,251 @@
+@import "normalize-3.0.1.less";
+@import "elements-0.9.less";
+
+//------------------------------------------------------------------------------
+// Fonts
+//------------------------------------------------------------------------------
+
+@font-face {
+  font-family: 'Open Sans Light';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/OpenSans-Light.eot');
+  src: local('Open Sans Light'), local('OpenSans-Light'),
+    url('../fonts/OpenSans-Light.eot') format('embedded-opentype'),
+    url('../fonts/OpenSans-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/OpenSans.eot');
+  src: local('Open Sans'), local('OpenSans'),
+    url('../fonts/OpenSans.eot') format('embedded-opentype'),
+    url('../fonts/OpenSans.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/OpenSans-Semibold.eot');
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'),
+    url('../fonts/OpenSans-Semibold.eot') format('embedded-opentype'),
+    url('../fonts/OpenSans-Semibold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Open Sans Light Italic'), local('OpenSansLight-Italic'),
+    url('../fonts/OpenSansLight-Italic.eot') format('embedded-opentype'),
+    url('../fonts/OpenSansLight-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Open Sans Italic'), local('OpenSans-Italic'),
+    url('../fonts/OpenSans-Italic.eot') format('embedded-opentype'),
+    url('../fonts/OpenSans-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 600;
+  src: local('Open Sans Semibold Italic'), local('OpenSans-SemiboldItalic'),
+    url('../fonts/OpenSans-SemiboldItalic.eot') format('embedded-opentype'),
+    url('../fonts/OpenSans-SemiboldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Droid Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/DroidSansMono.eot');
+  src: local('Droid Sans Mono'), local('DroidSansMono'),
+    url('../fonts/DroidSansMono.eot') format('embedded-opentype'),
+    url('../fonts/DroidSansMono.woff') format('woff');
+}
+
+.font-light(@size) {
+  font-family: 'Open Sans Light';
+  font-size: @size;
+  font-weight: 300;
+}
+
+.font-normal(@size) {
+  font-family: 'Open Sans';
+  font-size: @size;
+  font-weight: 400;
+}
+
+.font-bold(@size) {
+  font-family: 'Open Sans';
+  font-size: @size;
+  font-weight: 600;
+}
+
+.font-mono(@size) {
+  font-family: 'Droid Sans Mono', monospace;
+  font-size: @size;
+  font-style: normal;
+  font-weight: 400;
+}
+
+//------------------------------------------------------------------------------
+// Variables
+//------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+// Tag Selectors
+//------------------------------------------------------------------------------
+
+html {
+  background-color: #272822;
+}
+
+body {
+  .box-sizing();
+  color: #222;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 400;
+}
+
+div {
+  .box-sizing();
+}
+
+code, pre {
+  font-family: "Droid Sans Mono";
+  font-weight: 400;
+}
+
+em {
+  font-style: italic;
+  font-family: "Open Sans";
+  font-weight: 400;
+}
+
+//------------------------------------------------------------------------------
+// Threading Macro Animations
+//------------------------------------------------------------------------------
+
+.wrapper-614a2 {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.top-e1133 {
+  margin: 40px 0 40px 0;
+}
+
+.steps-4fe74 {
+  margin-bottom: 100px;
+}
+
+.step-ac2ae {
+  background: #3c3c3c;
+  color: #fff;
+  cursor: pointer;
+  float: left;
+  .font-mono(14px);
+  margin: 0 50px 40px 0;
+  position: relative;
+  .opacity(.5);
+}
+
+.small-char-3142f {
+  position: absolute;
+  text-align: center;
+}
+
+.outer-d18c5 {
+  height: 100px;
+  margin: 40px 0 0 0;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.big-screen-39c87 {
+  margin: 0 0 40px 50px;
+  position: relative;
+  width: 100%;
+}
+
+.big-char-6b108 {
+  color: #fff;
+  .font-mono(70px);
+  position: absolute;
+  text-align: center;
+}
+
+.red-ccca5 {
+  color: #f92672;
+}
+
+.big-num-c7cf6 {
+  color: #8f908a;
+  .font-mono(50px);
+  padding-top: 20px;
+  position: absolute;
+  text-align: center;
+}
+
+.active-step-938e5 {
+  .opacity(1);
+
+  .step-label-e483d {
+    color: #fff;
+  }
+}
+
+.small-num-59b3c {
+  color: #8f908a;
+  cursor: default;
+  font-size: 11px;
+  padding-top: 4px;
+  position: absolute;
+}
+
+.step-label-e483d {
+  color: #888;
+  .font-bold(11px);
+  position: absolute;
+  text-transform: uppercase;
+  top: -22px;
+}
+
+.btn-db258 {
+  background: #b1ef35;
+  border: 0;
+  display: inline-block;
+  .font-bold(14px);
+  padding: 8px 16px;
+  .rounded(4px;);
+  text-transform: uppercase;
+  -webkit-appearance: none;
+
+  .fa {
+    font-size: 12px;
+    margin-right: 6px;
+  }
+}
+
+.btn-db258:focus {
+  outline: 0;
+}
+
+#pauseButton {
+  background: #8f908a;
+}
+
+.buttons-38e39 {
+  margin-bottom: 60px;
+}

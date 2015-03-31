@@ -10,8 +10,7 @@
   :dependencies [
     [org.clojure/clojure "1.6.0"]
     [org.clojure/clojurescript "0.0-3126"]
-    ;; [hiccups "0.3.0"]
-    ]
+    [hiccups "0.3.0"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]]
 
@@ -25,16 +24,18 @@
   :cljsbuild {
     :builds {
 
-      :client {
+      :debug {
         :source-paths ["src-cljs"]
         :compiler {
           :output-to "public/js/main.js"
           :optimizations :whitespace }}
 
-      :client-adv {
+      :prod {
         :source-paths ["src-cljs"]
         :compiler {
+          :externs ["externs/jquery-1.9.js"]
           :output-to "public/js/main.min.js"
           :optimizations :advanced
           :pretty-print false }}
+
 }})

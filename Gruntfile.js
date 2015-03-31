@@ -1,7 +1,3 @@
-var fs = require('fs'),
-  marked = require('marked'),
-  md5 = require('MD5');
-
 module.exports = function(grunt) {
 'use strict';
 
@@ -88,10 +84,8 @@ grunt.initConfig({
 // load tasks from npm
 grunt.loadNpmTasks('grunt-contrib-less');
 grunt.loadNpmTasks('grunt-contrib-watch');
-
 grunt.registerTask('animation', analyzeAnimation);
-
-grunt.registerTask('default', 'less');
+grunt.registerTask('default', 'watch');
 
 // end module.exports
 };
